@@ -1,0 +1,110 @@
+{
+    "settings": {
+        "index": {
+            "number_of_shards": 1,
+            "number_of_replicas": 0,
+            "refresh_interval": "60s",
+            "similarity": {
+                "default": {
+                    "type": "BM25"
+                }
+            }
+        },
+        "analysis": {
+            "analyzer": {
+                "unigram_analyzer": {
+                    "type": "custom",
+                    "char_filter": [
+                    ],
+                    "tokenizer": "unigram_tokenizer",
+                    "filter": [
+                        "lowercase"
+                    ]
+                },
+                "bigram_analyzer": {
+                    "type": "custom",
+                    "char_filter": [
+                    ],
+                    "tokenizer": "bigram_tokenizer",
+                    "filter": [
+                        "lowercase"
+                    ]
+                },
+                "kuromoji_analyzer": {
+                    "type": "custom",
+                    "char_filter": [
+                    ],
+                    "tokenizer": "kuromoji",
+                    "filter": [
+                        "stopJa",
+                        "lowercase"
+                    ]
+                }
+            },
+            "char_filter": {
+            },
+            "filter": {
+                "stopJa": {
+                    "type": "stop",
+                    "stopwords": "_japanese_"
+                }
+            },
+            "tokenizer": {
+                "unigram_tokenizer": {
+                    "type": "ngram",
+                    "min_gram": 1,
+                    "max_gram": 1
+                },
+                "bigram_tokenizer": {
+                    "type": "ngram",
+                    "min_gram": 2,
+                    "max_gram": 2
+                },
+                "kuromoji": {
+                    "type": "kuromoji_tokenizer",
+                    "mode": "search",
+                    "discard_punctuation": false
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "title": {
+                "type": "text",
+                "analyzer": "unigram_analyzer",
+                "fields": {
+                    "bi": {
+                        "type": "text",
+                        "analyzer": "bigram_analyzer"
+                    },
+                    "tk": {
+                        "type": "text",
+                        "analyzer": "kuromoji_analyzer"
+                    }
+                }
+            },
+            "content": {
+                "type": "text",
+                "analyzer": "unigram_analyzer",
+                "fields": {
+                    "bi": {
+                        "type": "text",
+                        "analyzer": "bigram_analyzer"
+                    },
+                    "tk": {
+                        "type": "text",
+                        "analyzer": "kuromoji_analyzer"
+                    }
+                }
+            },
+            "url": {
+                "type": "text",
+                "analyzer": "unigram_analyzer"
+            },
+            "thumbnail": {
+                "type": "keyword"
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+services:
+  cerebro:
+    image: lmenezes/cerebro:0.9.4
+    ports:
+      - "9000:9000"
+    depends_on:
+      - es
+    environment:
+      - JAVA_OPTS=--illegal-access=warn
+  es:
+    build: es8
+    ports:
+      - "19200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - thread_pool.search_worker.size=200
+      - "ES_JAVA_OPTS=-Xms8g -Xmx8g"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-s", "http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+      - ./data/esdata:/usr/share/elasticsearch/data
