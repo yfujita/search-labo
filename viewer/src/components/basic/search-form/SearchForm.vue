@@ -54,13 +54,23 @@ export default defineComponent({
 
 <template>
   <form :action="resultPage" method="GET" class="searchLaboForm" styleId="searchForm" @submit="submit">
-    <div class="form-group row align-items-center">
-      <div class="col-auto">
-        <div class="">
-          <input id="contentQuery" v-model="state.query" type="text" name="searchLabo.query" maxlength="1000" size="50" class="query form-control" autocomplete="off">
-        </div>
+    <div class="row mb-3">
+      <label for="contentQuery" class="form-label col-2 col-form-label">Query</label>
+      <div class="col-5">
+        <input id="contentQuery" v-model="state.query" type="text" name="searchLabo.query" maxlength="1000" size="50" class="query form-control" autocomplete="off">
       </div>
-      <div class="col-auto btn-group">
+    </div>
+    <div class="row mb-3">
+      <label for="exampleInputEmail1" class="form-label col-2 col-form-label">Search Type</label>
+      <div class="col-5">
+        <select id="queryType" class="form-select" aria-label="Default select example">
+          <option value="basic" selected>Basic</option>
+          <option value="bert">Bert</option>
+        </select>
+      </div>
+    </div>
+    <div class="rowmb-3">
+      <div class="col-3">
         <button type="submit" name="search" class="searchButton btn btn-primary">
           Search
         </button>
