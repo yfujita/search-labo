@@ -1,0 +1,17 @@
+# Git関連ファイルを無視する
+.git
+.gitignore
+
+# ビルド出力を無視する
+build
+dist
+
+# Node.jsモジュールを無視する
+node_modules
+
+# 一時ファイルやログファイルを無視する
+*.log
+*.tmp
+
+# 特定のファイルを無視する
+secret.txt

@@ -1,0 +1,41 @@
+h1,
+h2,
+h3 {
+    line-height: 32px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+#result ol li {
+    margin: 2em 0;
+}
+
+#result ol li:first-child {
+    margin-top: 0;
+}
+
+#result .title a:visited {
+    color: #014c8c;
+}
+
+#result .body {
+    display: flex;
+    align-items: flex-start;
+}
+
+#result .site cite {
+    color: #093;
+    font-style: normal;
+}
+
+

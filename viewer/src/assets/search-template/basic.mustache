@@ -1,0 +1,65 @@
+{
+    "from": "{{from}}",
+    "size": "{{size}}",
+    "query": {
+        "bool": {
+            "should": [
+                {{#keywords}}
+                {
+                    "match_phrase": {
+                        "content": {
+                            "query": "{{.}}",
+                            "boost": 2
+                        }
+                    }
+                },
+                {
+                    "match_phrase": {
+                        "title": {
+                            "query": "{{.}}",
+                            "boost": 3
+                        }
+                    }
+                },
+                {
+                    "match": {
+                        "content.tk": {
+                            "query": "{{.}}",
+                            "boost": 2
+                        }
+                    }
+                },
+                {
+                    "match": {
+                        "title.tk": {
+                            "query": "{{.}}",
+                            "boost": 3
+                        }
+                    }
+                },
+                {{/keywords}}
+            ],
+            "minimum_should_match": 1
+        }
+    },
+    "highlight": {
+        "fields": {
+            "content": {
+                "type": "plain",
+                "fragment_size": 60,
+                "number_of_fragments": 1,
+                "fragmenter": "simple",
+                "pre_tags": ["<b>"],
+                "post_tags": ["</b>"]
+            },
+            "content.tk": {
+                "type": "plain",
+                "fragment_size": 60,
+                "number_of_fragments": 1,
+                "fragmenter": "simple",
+                "pre_tags": ["<b>"],
+                "post_tags": ["</b>"]
+            }
+        }
+    }
+}

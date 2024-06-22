@@ -4,7 +4,8 @@ services:
     ports:
       - "9000:9000"
     depends_on:
-      - es
+      es:
+        condition: service_healthy
     environment:
       - JAVA_OPTS=--illegal-access=warn
   es:
@@ -16,6 +17,8 @@ services:
       - xpack.security.enabled=false
       - thread_pool.search_worker.size=200
       - "ES_JAVA_OPTS=-Xms8g -Xmx8g"
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
     healthcheck:
       test: ["CMD", "curl", "-f", "-s", "http://localhost:9200"]
       interval: 10s
@@ -23,3 +26,12 @@ services:
       retries: 6
     volumes:
       - ./data/esdata:/usr/share/elasticsearch/data
+  viewer:
+    build: viewer
+    ports:
+      - "18080:8080"
+    depends_on:
+      es:
+        condition: service_healthy
+    environment:
+      - JAVA_OPTS=--illegal-access=warn
