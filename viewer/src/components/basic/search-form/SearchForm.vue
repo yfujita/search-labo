@@ -15,7 +15,8 @@ export default defineComponent({
   setup(props, context) {
     // reactive data
     const state = reactive({
-      query: ''
+      query: '',
+      searchType: 'basic',
     });
 
     onMounted(() => {
@@ -37,6 +38,8 @@ export default defineComponent({
       if (state.query !== '') {
         searchCond.q = state.query;
       }
+      console.log('searchType: ' + state.searchType);
+      searchCond.searchType = state.searchType;
       // Emit search event.
       SearchEvent.emitBasicSearch(searchCond);
       event.preventDefault();
@@ -53,7 +56,7 @@ export default defineComponent({
 
 
 <template>
-  <form :action="resultPage" method="GET" class="searchLaboForm" styleId="searchForm" @submit="submit">
+  <form action="" method="GET" class="searchLaboForm" styleId="searchForm" @submit="submit">
     <div class="row mb-3">
       <label for="contentQuery" class="form-label col-2 col-form-label">Query</label>
       <div class="col-5">
@@ -63,9 +66,9 @@ export default defineComponent({
     <div class="row mb-3">
       <label for="exampleInputEmail1" class="form-label col-2 col-form-label">Search Type</label>
       <div class="col-5">
-        <select id="queryType" class="form-select" aria-label="Default select example">
-          <option value="basic" selected>Basic</option>
-          <option value="bert">Bert</option>
+        <select v-model="state.searchType" id="queryType" class="form-select" aria-label="">
+          <option value="basic">Basic</option>
+          <option value="knn">kNN</option>
         </select>
       </div>
     </div>

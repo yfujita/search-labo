@@ -58,5 +58,5 @@ class EsClient:
             },
             data=bulk_str,
         )
-        print(f'Bulk success {response.text}', flush=True)
+        #print(f'Bulk success {response.text}', flush=True)
         response.raise_for_status()

@@ -101,6 +101,12 @@
                     }
                 }
             },
+            "doc_vector": {
+                "type": "dense_vector",
+                "dims": 768,
+                "index": "true",
+                "similarity": "cosine"
+            },
             "url": {
                 "type": "text",
                 "analyzer": "unigram_analyzer"

@@ -19,6 +19,7 @@ class SearchEvent extends EventBus {
 
   getInitialSearchCond() {
     return {
+      searchType: 'basic',
       q: '',
       sort: '',
       label: '',

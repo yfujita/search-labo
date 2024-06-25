@@ -31,13 +31,13 @@ export default defineComponent({
 
     const _description = () => {
       if (props.searchHit.highlight === undefined) {
-        return props.searchHit._source.content.substring(0, 20) + '...';
+        return props.searchHit._source.content.substring(0, 40) + '...';
       } else if (props.searchHit.highlight.content !== undefined) {
         return props.searchHit.highlight.content;
       } else if (props.searchHit.highlight['content.tk'] !== undefined) {
         return props.searchHit.highlight['content.tk'];
       } else {
-        return props.searchHit._source.content.substring(0, 20) + '...';
+        return props.searchHit._source.content.substring(0, 40) + '...';
       }
     };
 

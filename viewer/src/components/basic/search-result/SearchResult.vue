@@ -76,7 +76,7 @@ export default defineComponent({
       // Copy search condition for custormization.
       const copiedSearchCond = SearchEvent.copySearchCond(searchCond);
       copiedSearchCond.pageSize = props.pageSize;
-      searchService.search('search-basic', copiedSearchCond).then ((response) => {
+      searchService.search(copiedSearchCond).then ((response) => {
         _updateSearchState(response, copiedSearchCond);
         state.show = true;
         if (searchCond.addition.scrollTop) {

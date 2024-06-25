@@ -25,7 +25,7 @@ def main():
         time.sleep(1)
 
     # 対象インデックス
-    indices: list[str] = ['search-basic']
+    indices: list[str] = ['search-basic', 'search-knn']
 
     # インデックスセットアップ
     for index in indices:
@@ -39,7 +39,7 @@ def main():
             settings = json.load(f)
         
         # インデックス作成
-        print(f'Create index {index}.', flush=True)
+        print(f'Create index: {index}', flush=True)
         es_client.create_index(index,
             settings = settings,
         )

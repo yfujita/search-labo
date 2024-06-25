@@ -5,6 +5,7 @@
 ### Run Apps
 
 ```bash
+$ docker compose build
 $ docker compose up
 ```
 

@@ -1,13 +1,4 @@
 services:
-  cerebro:
-    image: lmenezes/cerebro:0.9.4
-    ports:
-      - "9000:9000"
-    depends_on:
-      es:
-        condition: service_healthy
-    environment:
-      - JAVA_OPTS=--illegal-access=warn
   es:
     build: es8
     ports:
@@ -26,6 +17,27 @@ services:
       retries: 6
     volumes:
       - ./data/esdata:/usr/share/elasticsearch/data
+  
+  #kibana:
+  #  image: kibana:8.14.1
+  #  environment:
+  #    - ELASTICSEARCH_HOSTS=http://es:9200
+  #  depends_on:
+  #    es:
+  #      condition: service_healthy
+  #  ports:
+  #    - "15601:5601"
+  
+  cerebro:
+    image: lmenezes/cerebro:0.9.4
+    ports:
+      - "9000:9000"
+    depends_on:
+      es:
+        condition: service_healthy
+    environment:
+      - JAVA_OPTS=--illegal-access=warn
+  
   viewer:
     build: viewer
     ports:
@@ -35,3 +47,10 @@ services:
         condition: service_healthy
     environment:
       - JAVA_OPTS=--illegal-access=warn
+  
+  ml-apis:
+    build: ml-apis
+    ports:
+      - "18081:18081"
+    volumes:
+      - ./data/my-apis/cache/huggingface:/root/.cache/huggingface
