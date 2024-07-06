@@ -12,8 +12,10 @@ class NdjsonExporter:
         self.content_counter = 0
         self.seperate_content_size = seperate_content_size
         self.lock = threading.Lock()
+        self.record_counter = 0
 
     def export(self, content: ExportContent) -> None:
+        self.record_counter += 1
         json_content = {
             'url': content.url,
             'title': content.title,
@@ -38,3 +40,8 @@ class NdjsonExporter:
             if self.content_counter >= self.seperate_content_size:
                 self.content_counter = 0
                 self.file_counter += 1
+        
+        print(f'Exported {self.record_counter} records.', flush=True)
+
+    def get_count(self) -> int:
+        return self.record_counter

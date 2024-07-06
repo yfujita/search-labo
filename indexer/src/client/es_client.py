@@ -49,6 +49,27 @@ class EsClient:
             print(e)
             return False
     
+    def set_aliases(self, index: str, aliases: list[str]):
+        print(f'[SetAliases] {index}...', flush=True)
+        try:
+            response = requests.post(
+                f"{self.es_url}/_aliases",
+                headers={
+                    'Content-Type': 'application/json',
+                },
+                json={
+                    'actions': [
+                        {'add': {'index': index, 'alias': alias}} for alias in aliases
+                    ]
+                },
+            )
+            print(f'[SetAliases] Response: {response.text}', flush=True)
+            response.raise_for_status()
+            return True
+        except requests.RequestException as e:
+            print(e)
+            return False
+    
     def bulk(self, bulk_str: str):
         print(f'Do Bulk', flush=True)
         response = requests.post(

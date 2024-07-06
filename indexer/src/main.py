@@ -9,7 +9,12 @@ from databuild.protocol import DatabuildProtocol
 from databuild.bulk_item import BulkItem
 
 def main():
-    print('Indexer start.', flush=True)
+    env: str = os.getenv('ENV')
+    if env is None or env == '':
+        print('ENV is not set.', flush=True)
+        exit(1)
+    
+    print(f'Starting Indexer. ENV={env}', flush=True)
 
     es_client = EsClient(
         es_url = 'http://es:9200'
@@ -39,10 +44,12 @@ def main():
             settings = json.load(f)
         
         # インデックス作成
-        print(f'Create index: {index}', flush=True)
-        es_client.create_index(index,
+        real_index_name = f'{index}-{env}'
+        print(f'Create index: {real_index_name}', flush=True)
+        es_client.create_index(real_index_name,
             settings = settings,
         )
+        es_client.set_aliases(real_index_name, [index])
 
         # databuildの取得
         databuild = databuild_factory.create(index)

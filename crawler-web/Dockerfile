@@ -9,4 +9,6 @@ COPY ./src/ .
 
 RUN mkdir /output
 
+ENV ENV=""
+
 CMD ["python", "./main.py"]

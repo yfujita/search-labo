@@ -1,0 +1,20 @@
+{
+    "crawl_target_urls": [
+        "https://hatena.blog/"
+    ],
+    "crawl_include_url_patterns": [
+        "https://hatena.blog/.*",
+        ".*hatenablog.com.*"
+    ],
+    "crawl_exclude_url_patterns": [
+        ".*/archive/.*"
+    ],
+    "data_include_url_patterns": [
+        ".*hatenablog.com/entry/.*"
+    ],
+    "data_exclude_url_patterns": [
+    ],
+    "max_pages": 10000,
+    "crawl_interval_mills": 1000,
+    "thread_num": 1
+}
