@@ -8,7 +8,7 @@ export default defineComponent({
   props: {
     enableThumbnail: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     searchHit: {
       type: Object,
@@ -22,7 +22,14 @@ export default defineComponent({
     console.log('item');
 
     const _existThumbnail = () => {
-      return false;
+      return props.searchHit._source.thumbnail !== undefined
+        && props.searchHit._source.thumbnail !== null
+        && props.searchHit._source.thumbnail !== '';
+    };
+
+    const _thumbnail = () => {
+      console.log(props.searchHit._source.thumbnail);
+      return props.searchHit._source.thumbnail;
     };
 
     const _title = () => {
@@ -55,6 +62,7 @@ export default defineComponent({
       title: _title(),
       description: _description(),
       url: _url(),
+      thumbnail: _thumbnail(),
       score: _score(),
     });
 
@@ -125,21 +133,21 @@ export default defineComponent({
         v-html="state.title"
       />
     </h3>
-    <div class="body">
-      <div v-if="enableThumbnail" v-show="state.existThumbnail" class="mr-3">
+    <div class="body row">
+      <div v-if="enableThumbnail" v-show="state.existThumbnail" class="col-1">
         <a
-          class="link d-none d-sm-flex"
+          class="link"
           :href="state.url"
           target="_blank"
         >
           <img
-            src=""
+            :src="state.thumbnail"
             alt="thumbnail"
-            class="thumbnail"
+            class="thumbnail img-fluid"
           >
         </a>
       </div>
-      <div class="description" v-html="state.description" />
+      <div class="description col-auto" v-html="state.description" />
     </div>
     <div class="site text-truncate">
       <cite>{{ state.url }}</cite>

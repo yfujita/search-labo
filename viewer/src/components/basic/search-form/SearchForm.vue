@@ -72,7 +72,7 @@ export default defineComponent({
         </select>
       </div>
     </div>
-    <div class="rowmb-3">
+    <div class="row mb-3">
       <div class="col-3">
         <button type="submit" name="search" class="searchButton btn btn-primary">
           Search

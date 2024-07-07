@@ -1,0 +1,33 @@
+{
+    "crawl_target_urls": [
+        "https://news.yahoo.co.jp/"
+    ],
+    "crawl_include_url_patterns": [
+        "https://news.yahoo.co.jp/$",
+        "https://news.yahoo.co.jp/articles/.*",
+        "https://news.yahoo.co.jp/pickup/.*",
+        "https://news.yahoo.co.jp/flash/.*",
+        "https://news.yahoo.co.jp/categories/.*",
+        "https://news.yahoo.co.jp/original/.*",
+        "https://news.yahoo.co.jp/expert/.*",
+        "https://news.yahoo.co.jp/ranking/.*"
+    ],
+    "crawl_exclude_url_patterns": [
+        ".*\\?.*",
+        ".*/rss/.*",
+        ".*comments.*",
+        ".*/polls/.*",
+        ".*paidnews.*",
+        ".*images.*",
+        ".*/author.*",
+        ".*/description.*"
+    ],
+    "data_include_url_patterns": [
+        ".*/articles/.*"
+    ],
+    "data_exclude_url_patterns": [
+    ],
+    "max_pages": 10000,
+    "crawl_interval_mills": 1000,
+    "thread_num": 3
+}
