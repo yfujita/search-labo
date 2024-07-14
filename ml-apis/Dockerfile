@@ -7,4 +7,6 @@ RUN pip install -r requirements.txt
 
 COPY ./app/ .
 
+ENV HF_ACCESS_TOKEN=""
+
 CMD ["python", "./main.py"]

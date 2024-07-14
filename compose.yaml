@@ -48,9 +48,21 @@ services:
     environment:
       - JAVA_OPTS=--illegal-access=warn
   
+#  ollama:
+#    build: ollama
+#    ports:
+#      - "11434:11434"
+#    environment:
+#      - MODEL_NAME=gemma2:9b-instruct-q8_0
+#      #- MODEL_NAME=llama3
+#    volumes:
+#      - ./data/ollama:/root/.ollama
+
   ml-apis:
     build: ml-apis
     ports:
       - "18081:18081"
+    environment:
+      - HF_ACCESS_TOKEN=
     volumes:
       - ./data/my-apis/cache/huggingface:/root/.cache/huggingface
