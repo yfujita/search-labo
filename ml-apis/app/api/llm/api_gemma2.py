@@ -34,7 +34,7 @@ def handle(request: ApiGemma2Request):
 
 def process_text(text: str) -> str:
     # テキストをトークン化
-    input_ids = tokenizer(text, return_tensors="pt")
+    input_ids = tokenizer(text, return_tensors="pt").to("cuda")
     # モデルを使ってテキストを生成
     outputs = model.generate(**input_ids,
         max_length=200,
